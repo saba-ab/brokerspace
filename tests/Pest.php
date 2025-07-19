@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Property;
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -12,7 +15,7 @@
 */
 
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+//  ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
 
 /*
@@ -45,3 +48,25 @@ function something()
 {
     // ..
 }
+
+function createTestUser()
+{
+    return User::factory()->create();
+}
+
+function createBrokerUser()
+{
+    return User::factory()->create()->assignRole('broker');
+}
+
+function createAdminUser()
+{
+    return User::factory()->create()->assignRole('admin');
+}
+
+function createProperty()
+{
+    return Property::factory()->create();
+}
+
+
