@@ -1,13 +1,16 @@
 <?php
-namespace App\Data;
 
-use App\Enums\DealType;
+namespace App\Data\Deals;
+
 use App\Enums\DealStatus;
+use App\Enums\DealType;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Support\Validation\ValidationContext;
 
-class CreateDealData extends Data
+class UpdateDealData extends Data
 {
     public function __construct(
+        public int $id,
         public int $property_id,
         public int $user_id,
         public DealType $type,
@@ -20,9 +23,10 @@ class CreateDealData extends Data
         public ?string $owner_email,
     ) {}
 
-    public static function rules(): array
+    public static function rules(ValidationContext $context = null): array
     {
         return [
+            'id' => ['required', 'exists:deals,id'],
             'property_id' => ['required', 'exists:properties,id'],
             'user_id' => ['required', 'exists:users,id'],
             'type' => ['required', 'in:' . implode(',', DealType::options())],

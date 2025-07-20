@@ -20,7 +20,7 @@ class AuthService
         return $user;
     }
 
-    public function login(LoginData $data)
+    public function login(LoginData $data): User|null
     {
         $user = $this->userService->findByEmail($data->email);
 

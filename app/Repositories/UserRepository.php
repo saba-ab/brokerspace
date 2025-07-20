@@ -11,12 +11,12 @@ class UserRepository implements UserRepositoryContract
         return User::create($data);
     }
 
-    public function findById(int $id): User
+    public function findById(int $id): User|null
     {
         return User::find($id);
     }
 
-    public function findByEmail(string $email): User
+    public function findByEmail(string $email): User|null
     {
         return User::where('email', $email)->first();
     }
